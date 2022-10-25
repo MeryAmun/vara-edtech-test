@@ -1,5 +1,8 @@
 const express = require('express');
+const dotEnv = require("dotenv");
+const connectDb = require('./config/databaseConfig');
 const app = express();
+dotEnv.config();
 
 app.use(express.json());
 app.use(express.urlencoded({limit:'30mb',extended:true}))
@@ -21,9 +24,23 @@ app.use((req, res, next) => {
 app.use('/',(req,res) => {
     res.send('Welcome to Vara-edTech test api')
 })
-const PORT = 9000;
-const host = 
- app.listen(PORT,()=> {
-    console.log(`Listening to Port ${PORT}, We are Live :)`)
- })
 
+let PORT = process.env.PORT
+const host = '0.0.0.0'
+ 
+
+ const server = async () => {
+    try {
+        await connectDb()
+            if(PORT === null || PORT === ""){
+                const PORT = 9000;
+            }
+            app.listen(PORT, host, ()=> {
+                console.log(`Listening to Port ${PORT}, We are Live :)`)
+             })
+       
+    } catch (error) {
+        console.log(error)
+    }
+ }
+ server()
