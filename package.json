@@ -1,0 +1,14 @@
+{
+  "name": "vara-test",
+  "version": "1.0.0",
+  "description": "recruitment test",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "keywords": [
+    "CMA"
+  ],
+  "author": "Chebesi-Awah",
+  "license": "ISC"
+}
