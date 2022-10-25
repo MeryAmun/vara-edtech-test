@@ -4,11 +4,16 @@
   "description": "recruitment test",
   "main": "index.js",
   "scripts": {
-    "test": "npm start"
+    "start": "nodemon  index.js"
   },
   "keywords": [
     "CMA"
   ],
   "author": "Chebesi-Awah",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
 }
