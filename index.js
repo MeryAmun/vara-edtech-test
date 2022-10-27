@@ -1,11 +1,14 @@
-const express = require('express');
+const express = require("express");
+const bodyParser = require("body-parser");
 const dotEnv = require("dotenv");
-const connectDb = require('./config/databaseConfig');
+const connectDb = require("./config/databaseConfig");
+const apiRoutes = require("./routes/routes");
 const app = express();
 dotEnv.config();
 
-app.use(express.json());
-app.use(express.urlencoded({limit:'30mb',extended:true}))
+app.use(bodyParser.json());
+///app.use(express.json());
+app.use(express.urlencoded({ limit: "30mb", extended: true }));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -20,27 +23,17 @@ app.use((req, res, next) => {
   next();
 });
 
-
+app.use("/api/v1", apiRoutes);
 app.get("/", (req, res) => {
-    res.send('Welcome to Vara-edTech test API')
-})
+  res.send("Welcome to Vara-edTech test API");
+});
 
-let PORT = 8080
-const host = '0.0.0.0'
- 
+let PORT = 8080;
+const host = "0.0.0.0";
 
- const server = async () => {
-    try {
-        await connectDb()
-            if(PORT === null || PORT === ""){
-                PORT = 9000;
-            }
-            app.listen(PORT, host, ()=> {
-                console.log(`Listening to Port ${PORT}, We are Live :)`)
-             })
-       
-    } catch (error) {
-        console.log(error)
-    }
- }
- server()
+if (PORT === null || PORT === "") {
+  PORT = 9000;
+}
+app.listen(PORT, host, () => {
+  console.log(`Listening to Port ${PORT}, We are Live :)`);
+});
