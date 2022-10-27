@@ -11,13 +11,12 @@ const getCustomersData = (req, res) => {
   res.send(customers);
 };
 
-const createCustomerData = (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const phone = req.body.phone;
+const createCustomerData = async (req, res) => {
+  const { name,email,phone } = req.body;
+
   let customers;
-  const sql = `INSERT INTO customers (name, email, phone) VALUES ("${name}", "${email}", "${phone}", NOW())`;
-  con.query(sql, function (err, result) {
+  
+  await con.query(`INSERT INTO customers (name, email, phone) VALUES ("${name}", "${email}", "${phone}")`, function (err, result) {
     if (err) throw err;
     console.log("Row has been updated");
     req.flash("success", "Data stored!");

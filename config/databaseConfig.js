@@ -9,7 +9,7 @@ dotEnv.config();
         port: 3306,
         user: process.env.USER_NAME,
         password: process.env.MYSQL_PASSWORD,
-        database: process.env.DB
+        database: 'testDB_Chebesi'
       });
       con.getConnection(function(err) {
         if (err) throw err;

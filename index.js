@@ -1,13 +1,11 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const dotEnv = require("dotenv");
-const connectDb = require("./config/databaseConfig");
 const apiRoutes = require("./routes/routes");
 const app = express();
 dotEnv.config();
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.json());
+app.use(express.urlencoded({extended: true,}))
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
