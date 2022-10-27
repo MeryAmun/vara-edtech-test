@@ -1,11 +1,16 @@
 const express = require('express');
-const { getCustomersData, getAddressData } = require('../controllers/controllers');
+const { getCustomersData, getAddressData, deleteCustomersData } = require('../controllers/controllers');
 const app = express();
 const router = express.Router()
 
 //customer CRUD operations
+//GET/SELECT
 router.get('/customers', getCustomersData);
+//POST/INSERT
 router.post('/customers/create', getCustomersData);
+//DELETE
+// DELETE Record
+router.get('/remove/(:id)', deleteCustomersData)
 
 
 

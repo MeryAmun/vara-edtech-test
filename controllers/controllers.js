@@ -31,9 +31,20 @@ const getCustomersData = (req, res) => {
           }
 
               const deleteCustomersData = (req, res) => {
-                connectDb("SELECT * FROM customers")
-                      const customers = req.body;
-                      res.send(customers)
+                var user = { id: req.params.id }
+                con.query(
+                  'DELETE FROM customers WHERE id = ' + req.params.id,
+                 customers,
+                  function (err, result) {
+                    if (err) {
+                      req.flash('error', err)
+                      res.redirect('/')
+                    } else {
+                      req.flash('success', 'Data removed :' + req.params.id)
+                      res.redirect('/')
+                    }
+                  },
+                )
                   }
 
 
