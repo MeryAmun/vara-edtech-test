@@ -1,5 +1,5 @@
 const express = require('express');
-const { getCustomersData, getAddressData, deleteCustomersData } = require('../controllers/controllers');
+const { getCustomersData, getAddressData, deleteCustomersData, createAddressData, deleteAddressData, updateCustomerData, updateAddressData, addressDataToUpdate, customerDataToUpdate } = require('../controllers/controllers');
 const app = express();
 const router = express.Router()
 
@@ -8,15 +8,46 @@ const router = express.Router()
 router.get('/customers', getCustomersData);
 //POST/INSERT
 router.post('/customers/create', getCustomersData);
-//DELETE
+//UPDATE
+router.get('/customer/edit/:id', function(request, response, next){
+
+	var id = request.params.id;
+
+	var query = `SELECT * FROM customers WHERE id = "${id}"`;
+
+	database.query(query, function(error, data){
+
+		response.render('customers', {title: 'Edit MySQL Table Data', action:'edit', sampleData:data[0]});
+
+	});
+
+});
+//UPDATE CUSTOMERS
+router.get('/edit/:id',customerDataToUpdate);
+router.post('/customer/edit/:id', updateCustomerData);
 // DELETE Record
-router.get('/remove/(:id)', deleteCustomersData)
+router.get('/customer/remove/(:id)', deleteCustomersData)
 
 
 
 
 //address CRUD operations
+
+//GET/SELECT
 router.get('/address', getAddressData);
+//POST/INSERT
+router.post('/address/create', createAddressData);
+//DELETE
+// DELETE Record
+router.get('/address/remove/(:id)', deleteAddressData)
+
+//UPDATE ADDRESS
+router.get('/edit/:id',addressDataToUpdate);
+router.post('/address/edit/:id', updateAddressData);
+
+
+
+
   
   
   //post comments
