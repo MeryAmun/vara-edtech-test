@@ -21,11 +21,11 @@ app.use((req, res, next) => {
 });
 
 
-app.use('/',(req,res) => {
-    res.send('Welcome to Vara-edTech test api')
+app.get("/", (req, res) => {
+    res.send('Welcome to Vara-edTech test API')
 })
 
-let PORT = process.env.PORT
+let PORT = 8080
 const host = '0.0.0.0'
  
 
@@ -33,7 +33,7 @@ const host = '0.0.0.0'
     try {
         await connectDb()
             if(PORT === null || PORT === ""){
-                const PORT = 9000;
+                PORT = 9000;
             }
             app.listen(PORT, host, ()=> {
                 console.log(`Listening to Port ${PORT}, We are Live :)`)
